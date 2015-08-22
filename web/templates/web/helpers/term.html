@@ -1,0 +1,5 @@
+{% if start_at or end_at %}
+{{ start_at|date:'Y年m月d日' }}〜{{ end_at|date:'Y年m月d日' }}
+{% else %}
+常時
+{% endif %}

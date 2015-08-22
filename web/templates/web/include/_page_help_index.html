@@ -1,0 +1,13 @@
+<div data-role="page" id="index">
+  <div data-role="header" data-id="header-index" data-position="fixed">
+    <a href="/questionnaire" data-icon="carat-l" data-ajax="false" class="ui-btn-left">戻る</a>
+    <h1>ヘルプ</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <ul data-role="listview" data-theme="a">
+      {% for help in helps %}
+        <li><a href="#show-{{ help.id }}" data-transition="slidefade">{{ help.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

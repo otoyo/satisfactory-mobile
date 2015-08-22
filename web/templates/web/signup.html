@@ -1,0 +1,50 @@
+{% extends "web/layouts/default.html" %}
+
+{% block title %}{% include "web/settings/service.html" %}{% endblock %}
+
+{% block body %}
+<script type="text/javascript" src="/static/scripts/signup.js"></script>
+<div data-role="page" id="page-login">
+  <div data-role="header" data-id="header-login" data-position="fixed">
+    <h1>ユーザー登録</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <form action="/signup" method="post" data-ajax="false">
+      {% csrf_token %}
+      <label for="username" class="required">アカウント名 <span class="smaller">(英数16文字まで)</span></label>
+      {% if 'username' in errors %}
+        <p class="error">必須項目です。</p>
+      {% endif %}
+      {% if 'username_uniqueness' in errors %}
+        <p class="error">既に使用されています。</p>
+      {% endif %}
+      <input type="text" name="username" id="username" placeholder="アカウント名" value="{{ post_data.username }}">
+      <label for="email" class="required">Eメールアドレス</label>
+      {% if 'email' in errors %}
+        <p class="error">必須項目です。</p>
+      {% endif %}
+      {% if 'email_uniqueness' in errors %}
+        <p class="error">既に使用されています。</p>
+      {% endif %}
+      <input type="email" name="email" id="email" placeholder="Eメールアドレス" value="{{ post_data.email }}">
+
+      <label for="password" class="required">パスワード <span class="smaller">(8〜24文字)</span></label>
+      {% if 'password' in errors %}
+        <p class="error">8~24文字必須です。</p>
+      {% endif %}
+      <div><span class="smaller">パスワードは忘れないように保管してください。</span></div>
+      <input type="password" name="password" id="password" placeholder="パスワード">
+      <label for="confirm-password" class="required">パスワード <span class="smaller">(確認)</span></label>
+      <p class="error" style="display:none;" id="error-password">パスワードが一致しません。</p>
+      <input type="password" id="confirm-password" placeholder="パスワード (確認)">
+      <p><a href="/term_of_use" data-ajax="false" target="_blank">利用規約</a>を確認し同意の上ご登録ください。</p>
+      <fieldset data-role="controlgroup" data-mini="true">
+        <label for="term-of-use">利用規約に同意します。</label>
+        <input type="checkbox" id="term-of-use">
+      </fieldset>
+      <div class="margin-top-20px"></div>
+      <button type="submit" class="ui-btn ui-corner-all ui-disabled" id="submit">登録</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<div data-role="page" id="email-edit">
+  <form action="/account/email/update" method="post" data-ajax="false">
+    {% csrf_token %}
+    <div data-role="header" data-id="header-email-edit" data-position="fixed">
+      <a href="#index" data-transition="slideup" data-direction="reverse" class="ui-btn-left">キャンセル</a>
+      <h1>Eメール変更</h1>
+      <button type="submit" class="ui-btn-right">完了</button>
+    </div>
+    <div role="main" class="ui-content">
+      <label for="email" class="required">Eメールアドレス</label>
+      {% if 'email' in errors %}
+        <p class="error">必須項目です。</p>
+      {% endif %}
+      <input type="email" data-clear-btn="true" name="email" id="email" placeholder="Eメールアドレス" value="{{ post_data.name|default:user.email }}">
+    </div>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+{% extends "web/layouts/default.html" %}
+
+{% block title %}{% include "web/settings/service.html" %}{% endblock %}
+
+{% block body %}
+<div data-role="page" id="index">
+  <div data-role="header" data-id="header-index" data-position="fixed">
+    <a href="/signup" data-ajax="false" class="ui-btn-left">新規登録</a>
+    <h1>{% include "web/settings/service.html" %}</h1>
+    <a href="/login" data-ajax="false" class="ui-btn-right">ログイン</a>
+  </div>
+  <div role="main" class="ui-content">
+    <div class="ui-body ui-body-a ui-corner-all margin-top-0">
+      <h3>Satisfactory Mobileとは？</h3>
+      <h4>ストレスフリーなアンケート体験</h4>
+      <p>スマートフォンに最適化されたユーザーインターフェースで、貴社の製品やサービスに対する顧客の自然な声を集めることができます。</p>
+      <h4>作成も集計もスマートフォンで</h4>
+      <p>管理画面もスマートフォンに最適化されているので、いつでもどこでも素早くアンケートを作成し、結果を閲覧・ダウンロードできます。</p>
+      <p><a href="/-/e2a58765" target="_blank">デモを見る</a></p>
+      <p>Satisfactory Mobileはアルファテスト中のため、無料でご利用いただけます。</p>
+    </div>
+    <div class="margin-top-30px"></div>
+    <p class="center">さあ、アンケートを作成しましょう！</p>
+    <p class="center"><a href="/signup" data-ajax="false">新規登録</a></p>
+  </div>
+</div>
+{% endblock %}

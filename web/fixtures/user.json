@@ -1,0 +1,18 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$15000$ZMSuA5B0G2s4$6Abj7pn+iypvUXaoj5zmCTEGiPTi5TyYPrVOIgv5jzI=",
+      "last_login": "2015-02-02 10:00:00+0900",
+      "username": "satisfactory.mobile",
+      "first_name": "Satisfactory",
+      "last_name": "Mobile",
+      "email": "satisfactory-mobile@example.com",
+      "is_superuser": 0,
+      "is_staff": 1,
+      "is_active": 1,
+      "date_joined": "2015-02-01 10:00:00+0900"
+    }
+  }
+]

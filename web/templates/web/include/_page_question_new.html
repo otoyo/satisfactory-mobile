@@ -1,0 +1,39 @@
+<script type="text/javascript" src="/static/scripts/question-new.js"></script>
+<div data-role="page" id="new">
+  <form action="/questionnaire/{{ questionnaire.id }}/question/create" method="post" data-ajax="false">
+    {% csrf_token %}
+    <div data-role="header" data-id="header-new" data-position="fixed">
+      <a href="#index" data-transition="slideup" data-direction="reverse" class="ui-btn-left">キャンセル</a>
+      <h1>新規質問</h1>
+      <button type="submit" class="ui-btn-right">完了</button>
+    </div>
+    <div role="main" class="ui-content">
+      <fieldset data-role="controlgroup" data-type="horizontal">
+        <legend>回答の形式</legend>
+        <input type="radio" name="form_type" id="form-type-selection" value="1"{% if not post_data.form_type or post_data.form_type and post_data.form_type == '1' %} checked="checked"{% endif %}>
+        <label for="form-type-selection">選択</label>
+        <input type="radio" name="form_type" id="form-type-text"value="2"{% if post_data.form_type and post_data.form_type == '2' %} checked="checked"{% endif %}>
+        <label for="form-type-text">テキスト</label>
+      </fieldset>
+      <label for="question-content" class="required">質問の内容</label>
+      <div><span class="smaller">個人を特定しうる情報を聞き出す内容とならないようご注意ください。</span></div>
+      {% if 'content' in errors %}
+        <p class="error">必須項目です。</p>
+      {% endif %}
+      <input type="text" name="content" id="question-content" placeholder="質問の内容" value="{{ post_data.content }}">
+      <div class="hide-on-from-type-text">
+        <label for="question-selectiveanswer" class="required">選択肢 <span class="smaller">(改行区切りで12個まで)</span></label>
+        {% if 'selectiveanswer' in errors %}
+          <p class="error">1〜12行必須です。</p>
+        {% endif %}
+        <textarea name="selectiveanswer" id="question-selectiveanswer" placeholder="選択肢">{{ post_data.selectiveanswer }}</textarea>
+        <p>選択可能数</p>
+        <p class="smaller">最小・最大を1にすると単一選択になります。</p>
+        <label for="question-min-num-answers">最小</label>
+        <input type="range" name="min_num_answers" id="question-min-num-answers" value="1" min="0" max="12">
+        <label for="question-max-num-answers">最大</label>
+        <input type="range" name="max_num_answers" id="question-max-num-answers" value="1" min="1" max="12">
+      </div>
+    </div>
+  </form>
+</div>

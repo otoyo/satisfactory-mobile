@@ -1,0 +1,17 @@
+{% extends "web/layouts/default.html" %}
+
+{% block title %}{% include "web/settings/service.html" %}{% endblock %}
+
+{% block body %}
+<div data-role="page" id="thankyou">
+  <div data-role="header" data-id="header-thankyou" data-position="fixed">
+    <h1>{% include "web/settings/service.html" %}</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <p class="ui-body ui-body-a ui-corner-all margin-top-0">{{ questionnaire.thanks_message|linebreaksbr }}</p>
+    {% if questionnaire.back_url %}
+      <p class="center"><a href="{{ questionnaire.back_url|default:'/' }}" data-ajax="false">戻る</a></p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

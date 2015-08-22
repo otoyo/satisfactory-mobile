@@ -1,0 +1,30 @@
+{% extends "web/layouts/default.html" %}
+
+{% block title %}{% include "web/settings/service.html" %}{% endblock %}
+
+{% block body %}
+<div data-role="page" id="page-login">
+  <div data-role="header" data-id="header-login" data-position="fixed">
+    <h1>{% include "web/settings/service.html" %}</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <form action="/login" method="post" data-ajax="false">
+      {% csrf_token %}
+      {% if is_invalid %}
+        <p class="red">ログイン情報に誤りがあります。</p>
+      {% endif %}
+      <label for="username">ID</label>
+      <input type="text" data-clear-btn="true" name="username" id="username" placeholder="ID">
+
+      <label for="password">パスワード</label>
+      <input type="password" name="password" id="password" placeholder="パスワード">
+      <div class="margin-top-20px"></div>
+      <button type="submit" class="ui-btn ui-corner-all">ログイン</button>
+    </form>
+    <div class="margin-top-30px"></div>
+    <p class="center">ユーザー登録がまだお済みでない方は</p>
+    <p class="center"><a href="/signup" data-ajax="false">新規登録</a></p>
+  </div>
+  {% include "web/include/_footer.html" %}
+</div>
+{% endblock %}

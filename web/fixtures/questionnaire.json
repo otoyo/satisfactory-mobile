@@ -1,0 +1,62 @@
+[
+  {
+    "model": "web.questionnaire",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "name": "1st questionnaire",
+      "content": "private",
+      "thanks_message": "some message",
+      "back_url": "http://alpacat.com",
+      "is_public": 0,
+      "urlkey": 1,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900"
+    }
+  },
+  {
+    "model": "web.questionnaire",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "name": "2nd questionnaire",
+      "content": "before start",
+      "thanks_message": "some message",
+      "back_url": null,
+      "is_public": 1,
+      "urlkey": 2,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900"
+    }
+  },
+  {
+    "model": "web.questionnaire",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "name": "3rd questionnaire",
+      "content": "open",
+      "thanks_message": "some message",
+      "back_url": null,
+      "is_public": 1,
+      "urlkey": 3,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900"
+    }
+  },
+  {
+    "model": "web.questionnaire",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "name": "4th questionnaire",
+      "content": "after end",
+      "thanks_message": "some message",
+      "back_url": null,
+      "is_public": 1,
+      "urlkey": 4,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900"
+    }
+  }
+]

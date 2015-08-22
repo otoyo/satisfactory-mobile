@@ -1,0 +1,40 @@
+{% load concat %}
+
+<div data-role="page" id="show">
+  {% include "web/include/_panel_account.html" %}
+  <div data-role="header" data-id="header-show" data-position="fixed">
+    <a href="/questionnaire" data-ajax="false" data-icon="carat-l" class="ui-btn-left">戻る</a>
+    <h1>{{ questionnaire.name }}</h1>
+    <a href="#panel-account" class="ui-btn-right">アカウント</a>
+  </div>
+  <div role="main" class="ui-content">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="/questionnaire/{{ questionnaire.id }}/question" data-ajax="false" data-icon="comment">質問設定</a></li>
+        <li><a href="#result" data-transition="slidefade" data-icon="user">結果閲覧</a></li>
+        <li><a href="#edit" data-transition="slideup" data-icon="edit">編集</a></li>
+      </ul>
+    </div>
+    <div class="margin-top-10px"></div>
+    <div class="ui-body ui-body-a ui-corner-all">
+      <h4>アンケート名</h4>
+      <p>{{ questionnaire.name }}</p>
+      <h4>アンケートの説明</h4>
+      <p>{{ questionnaire.content|linebreaksbr }}</p>
+      <h4>アンケートのURL</h4>
+      <p>{% if questionnaire.is_open %}<a href="/-/{{ questionnaire.urlkey.val }}" data-ajax="false" target="_blank"><span class="weight-normal">{% include "web/settings/url.html" with path="/-/"|concat:questionnaire.urlkey.val %}</span></a>{% else %}{% include "web/settings/url.html" with path="/-/"|concat:questionnaire.urlkey.val %}{% endif %}</p>
+      <h4>回答者へのお礼</h4>
+      <p>{{ questionnaire.thanks_message|linebreaksbr }}</p>
+      <h4>回答後に戻るURL</h4>
+      <p>{{ questionnaire.back_url|default:'なし' }}</p>
+      <h4>下書き / 公開</h4>
+      <p>{% if questionnaire.is_public %}公開{% else %}下書き{% endif %}</p>
+      <h4>期間</h4>
+      <p>{% include "web/helpers/term.html" with start_at=questionnaire.start_at end_at=questionnaire.end_at %}</p>
+    </div>
+    <form action="/questionnaire/{{ questionnaire.id }}/delete" method="post" data-ajax="false">
+      {% csrf_token %}
+      <p class="center"><a href="javascript:void(0);" class="smaller confirm-submit" data-msg="このアンケートを削除してもよろしいですか？">このアンケートを削除する</a></p>
+    </form>
+  </div>
+</div>

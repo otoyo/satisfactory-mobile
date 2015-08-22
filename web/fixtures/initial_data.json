@@ -1,0 +1,212 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$15000$ZMSuA5B0G2s4$6Abj7pn+iypvUXaoj5zmCTEGiPTi5TyYPrVOIgv5jzI=",
+      "last_login": "2015-02-02 10:00:00+0900",
+      "username": "satisfactory.mobile",
+      "first_name": "Satisfactory",
+      "last_name": "Mobile",
+      "email": "satisfactory-mobile@example.com",
+      "is_superuser": 1,
+      "is_staff": 1,
+      "is_active": 1,
+      "date_joined": "2015-02-01 10:00:00+0900"
+    }
+  },
+  {
+    "model": "web.urlkey",
+    "pk": 1,
+    "fields": {
+      "val": "e2a58765"
+    }
+  },
+  {
+    "model": "web.questionnaire",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "name": "サンプルアンケート",
+      "content": "アンケートのデモです。",
+      "thanks_message": "ご回答ありがとうございました。回答後の文言は自由に設定できます。",
+      "back_url": "/",
+      "is_public": 1,
+      "urlkey": 1,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900"
+    }
+  },
+  {
+    "model": "web.question",
+    "pk": 1,
+    "fields": {
+      "questionnaire": 1,
+      "content": "テキスト形式の質問です。",
+      "form_type": 2,
+      "min_num_answers": null,
+      "max_num_answers": null,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 0
+    }
+  },
+  {
+    "model": "web.question",
+    "pk": 2,
+    "fields": {
+      "questionnaire": 1,
+      "content": "単一選択形式の質問です。",
+      "form_type": 1,
+      "min_num_answers": 1,
+      "max_num_answers": 1,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 1
+    }
+  },
+  {
+    "model": "web.question",
+    "pk": 3,
+    "fields": {
+      "questionnaire": 1,
+      "content": "複数選択形式の質問です。",
+      "form_type": 1,
+      "min_num_answers": 1,
+      "max_num_answers": 3,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 2
+    }
+  },
+  {
+    "model": "web.selectiveanswer",
+    "pk": 1,
+    "fields": {
+      "question": 2,
+      "content": "選択肢は",
+      "num": 0,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 0
+    }
+  },
+  {
+    "model": "web.selectiveanswer",
+    "pk": 2,
+    "fields": {
+      "question": 2,
+      "content": "最大12個まで",
+      "num": 0,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 1
+    }
+  },
+  {
+    "model": "web.selectiveanswer",
+    "pk": 3,
+    "fields": {
+      "question": 2,
+      "content": "設定できます。",
+      "num": 0,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 2
+    }
+  },
+  {
+    "model": "web.selectiveanswer",
+    "pk": 4,
+    "fields": {
+      "question": 3,
+      "content": "複数選択形式では",
+      "num": 0,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 0
+    }
+  },
+  {
+    "model": "web.selectiveanswer",
+    "pk": 5,
+    "fields": {
+      "question": 3,
+      "content": "最小・最大選択数を",
+      "num": 0,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 1
+    }
+  },
+  {
+    "model": "web.selectiveanswer",
+    "pk": 6,
+    "fields": {
+      "question": 3,
+      "content": "設定できます。",
+      "num": 0,
+      "updated_at": "2015-02-01 10:00:00+0900",
+      "created_at": "2015-02-01 10:00:00+0900",
+      "_order": 2
+    }
+  },
+  {
+    "model": "web.urlkey",
+    "pk": 2,
+    "fields": {
+      "val": "74a997e4"
+    }
+  },
+  {
+    "model": "web.questionnaire",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "name": "ご意見・ご要望",
+      "content": "Satisfactory Mobileに対するご意見・ご要望をお寄せください。",
+      "thanks_message": "ご回答誠にありがとうございました。今後ともSatisfactory Mobileをよろしくお願いいたします。",
+      "back_url": null,
+      "is_public": 1,
+      "urlkey": 2,
+      "updated_at": "2015-04-01 10:00:00+0900",
+      "created_at": "2015-04-01 10:00:00+0900"
+    }
+  },
+  {
+    "model": "web.question",
+    "pk": 4,
+    "fields": {
+      "questionnaire": 2,
+      "content": "ご意見・ご要望をご入力ください。",
+      "form_type": 2,
+      "min_num_answers": null,
+      "max_num_answers": null,
+      "updated_at": "2015-04-01 10:00:00+0900",
+      "created_at": "2015-04-01 10:00:00+0900",
+      "_order": 0
+    }
+  },
+  {
+    "model": "web.urlkey",
+    "pk": 3,
+    "fields": {
+      "val": "6118e268"
+    }
+  },
+  {
+    "model": "web.questionnaire",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "name": "お客様アンケート",
+      "content": "お客様のSatisfactory Mobileご利用についてお聞かせください。",
+      "thanks_message": "ご回答誠にありがとうございました。今後ともSatisfactory Mobileをよろしくお願いいたします。",
+      "back_url": "/login",
+      "is_public": 1,
+      "urlkey": 3,
+      "updated_at": "2015-04-01 10:00:00+0900",
+      "created_at": "2015-04-01 10:00:00+0900"
+    }
+  }
+]

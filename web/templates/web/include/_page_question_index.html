@@ -1,0 +1,25 @@
+<div data-role="page" id="index">
+  {% include "web/include/_panel_account.html" %}
+  <div data-role="header" data-id="header-index" data-position="fixed">
+    <a href="/questionnaire/{{ questionnaire.id }}" data-ajax="false" data-icon="carat-l" class="ui-btn-left">戻る</a>
+    <h1>質問</h1>
+    <a href="#panel-account" class="ui-btn-right">アカウント</a>
+  </div>
+  <div role="main" class="ui-content">
+    <ul data-role="listview" data-theme="a">
+      {% if msg %}
+      <li data-role="list-divider" data-theme="b">{% include "web/helpers/msg.html" with msg=msg %}</li>
+      {% endif %}
+      {% if questions|length < question_limit %}
+      <li data-icon="plus"><a href="#new" data-transition="slideup">質問を作成する</a></li>
+      {% endif %}
+      {% if questions|length > 1 %}
+      <li data-icon="bullets"><a href="#reorder" id="open-reorder" data-transition="slideup">順番を並べ替える</a></li>
+      {% endif %}
+      <li data-role="list-divider">作成した質問<span class="ui-li-count">{{ questions|length }}/{{ question_limit }}</span></li>
+      {% for question in questions %}
+      <li><a href="#show-{{ question.id }}" data-transition="slidefade">{{ forloop.counter }}. {{ question.content }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<script type="text/javascript" src="/static/scripts/question-reorder.js?20150414"></script>
+<div data-role="page" id="reorder">
+  <form action="/questionnaire/{{ questionnaire.id }}/question/reorder" method="post" data-ajax="false">
+    {% csrf_token %}
+    <input type="hidden" name="question_ids" id="question-ids" />
+    <div data-role="header" data-id="header-reorder" data-position="fixed">
+      <a href="#index" data-transition="slideup" data-direction="reverse" class="ui-btn-left" id="cancel-reorder">キャンセル</a>
+      <h1>並べ替え</h1>
+      <button type="submit" class="ui-btn-right" id="submit-reorder" disabled="disabled">完了</button>
+    </div>
+    <div role="main" class="ui-content">
+      <ul data-role="listview" data-theme="a" data-count-theme="b" id="ul-reorder" data-question-count="{{ questions|length }}">
+        <li data-role="list-divider">並べ替えたい順に選択してください。</li>
+        {% for question in questions %}
+        <li data-icon="false" data-question-id="{{ question.id }}"><a href="javascript:void(0);">{{ forloop.counter }}. {{ question.content }} <span class="ui-li-count"></span></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </form>
+</div>

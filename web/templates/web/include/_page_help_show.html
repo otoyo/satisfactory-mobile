@@ -1,0 +1,14 @@
+{% for help in helps %}
+<div data-role="page" id="show-{{ help.id }}">
+  <div data-role="header" data-id="header-show-{{ help.id }}" data-position="fixed">
+    <a href="#index" data-icon="carat-l" data-transition="slidefade" data-direction="reverse" class="ui-btn-left">戻る</a>
+    <h1>ヘルプ</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <div class="ui-body ui-body-a ui-corner-all">
+      <h4>{{ help.title }}</h4>
+      <p>{{ help.content|linebreaksbr }}</p>
+    </div>
+  </div>
+</div>
+{% endfor %}

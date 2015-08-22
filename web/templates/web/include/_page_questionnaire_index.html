@@ -1,0 +1,33 @@
+<div data-role="page" id="menu">
+  {% include "web/include/_panel_account.html" %}
+  <div data-role="header" data-id="header-menu" data-position="fixed">
+    <h1>アンケート <span class="smaller">[{{ questionnaire_count }}{% if questionnaire_limit < 1000 %}/{{ questionnaire_limit }}{% endif %}]</span></h1>
+    <a href="#panel-account" class="ui-btn-right">アカウント</a>
+  </div>
+  <div role="main" class="ui-content">
+    <ul data-role="listview" data-theme="a">
+      {% if msg %}
+      <li data-role="list-divider" data-theme="b">{% include "web/helpers/msg.html" with msg=msg %}</li>
+      {% endif %}
+      {% if questionnaire_count < questionnaire_limit %}
+      <li data-icon="plus"><a href="#new" data-transition="slideup">アンケートを作成する</a></li>
+      {% endif %}
+      <li data-role="list-divider">下書きのアンケート<span class="ui-li-count">{{ questionnaire_list.private|length }}</span></li>
+      {% for questionnaire in questionnaire_list.private %}
+      <li {% if questionnaire.id in highlighted_questionnaire_ids %}data-theme="b"{% endif %}><a href="/questionnaire/{{ questionnaire.id }}" data-ajax="false">{{ questionnaire.name }}</a></li>
+      {% endfor %}
+      <li data-role="list-divider">公開待ちのアンケート<span class="ui-li-count">{{ questionnaire_list.before_start|length }}</span></li>
+      {% for questionnaire in questionnaire_list.before_start %}
+      <li {% if questionnaire.id in highlighted_questionnaire_ids %}data-theme="b"{% endif %}><a href="/questionnaire/{{ questionnaire.id }}" data-ajax="false"><h2>{{ questionnaire.name }}</h2><p>{% include "web/helpers/term.html" with start_at=questionnaire.start_at end_at=questionnaire.end_at %}</p></a></li>
+      {% endfor %}
+      <li data-role="list-divider">募集中のアンケート<span class="ui-li-count">{{ questionnaire_list.open|length }}</span></li>
+      {% for questionnaire in questionnaire_list.open %}
+      <li {% if questionnaire.id in highlighted_questionnaire_ids %}data-theme="b"{% endif %}><a href="/questionnaire/{{ questionnaire.id }}" data-ajax="false"><h2>{{ questionnaire.name }}</h2><p>{% include "web/helpers/term.html" with start_at=questionnaire.start_at end_at=questionnaire.end_at %}</p></a></li>
+      {% endfor %}
+      <li data-role="list-divider">終了したアンケート<span class="ui-li-count">{{ questionnaire_list.after_end|length }}</span></li>
+      {% for questionnaire in questionnaire_list.after_end %}
+      <li {% if questionnaire.id in highlighted_questionnaire_ids %}data-theme="b"{% endif %}><a href="/questionnaire/{{ questionnaire.id }}" data-ajax="false"><h2>{{ questionnaire.name }}</h2><p>{% include "web/helpers/term.html" with start_at=questionnaire.start_at end_at=questionnaire.end_at %}</p></a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

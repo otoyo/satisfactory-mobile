@@ -1,0 +1,21 @@
+{% extends "web/layouts/default.html" %}
+
+{% block title %}ようこそ{% endblock %}
+
+{% block body %}
+<div data-role="page" id="welcome">
+  <div data-role="header" data-id="header-welcome" data-position="fixed">
+    <h1>{% include "web/settings/service.html" %}</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <div class="ui-body ui-body-a ui-corner-all margin-top-0">
+      <h3>ようこそ</h3>
+      <p>ご登録誠にありがとうございます。</p>
+      <p>私たちは常にお客様のお声に耳を傾け、サービスの改善に努めております。</p>
+      <p>もしよろしければ下記のお客様アンケートにご協力ください。</p>
+      <p><a href="/-/6118e268" data-ajax="false" target="_blank">お客様アンケート</a></p>
+    </div>
+    <p class="center"><a href="/login" data-ajax="false" class="ui-btn ui-corner-all">ログインして始める</a></p>
+  </div>
+</div>
+{% endblock %}

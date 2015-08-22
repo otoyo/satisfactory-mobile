@@ -1,0 +1,41 @@
+<div data-role="page" id="new">
+  <form action="/questionnaire/create" method="post" data-ajax="false">
+    {% csrf_token %}
+    <div data-role="header" data-id="header-new" data-position="fixed">
+      <a href="#menu" data-transition="slideup" data-direction="reverse" class="ui-btn-left">キャンセル</a>
+      <h1>新規アンケート</h1>
+      <button type="submit" class="ui-btn-right">完了</button>
+    </div>
+    <div role="main" class="ui-content">
+      <label for="questionnaire-name" class="required">アンケート名 <span class="smaller">(70字まで)</span></label>
+      {% if 'name' in errors %}
+        <p class="error">必須項目です。</p>
+      {% endif %}
+      <input type="text" data-clear-btn="true" name="name" id="questionnaire-name" placeholder="アンケート名" value="{{ post_data.name }}">
+      <label for="questionnaire-content" class="required">アンケートの説明</label>
+      {% if 'content' in errors %}
+        <p class="error">必須項目です。</p>
+      {% endif %}
+      <textarea id="questionnaire-content" name="content">{{ post_data.content }}</textarea>
+      <label for="questionnaire-thanks-message" class="required">回答者へのお礼</label>
+      {% if 'thanks_message' in errors %}
+        <p class="error">必須項目です。</p>
+      {% endif %}
+      <textarea id="questionnaire-thanks-message" name="thanks_message">{{ post_data.thanks_message|default:'ご回答ありがとうございました。' }}</textarea>
+      <label for="questionnaire-back-url">回答後に戻るURL <span class="smaller">(オプション)</small></label>
+      {% if 'back_url' in errors %}
+        <p class="error">正しいURLをご入力ください。</p>
+      {% endif %}
+      <input type="text" data-clear-btn="true" name="back_url" id="questionnaire-back-url" placeholder="戻るURL" value="{{ post_data.back_url }}">
+      <label for="is-public">下書き / 公開</label>
+      <select name="is_public" id="is-public" data-role="slider">
+        <option value="0">下書き</option>
+        <option value="1"{% if post_data.is_public %} selected="selected"{% endif %}>公開</option>
+      </select>
+      <label for="start-at">開始日 <span class="smaller">(指定なし可)</span></label>
+      <input type="date" name="start_at" id="start-at" value="{{ post_data.start_at }}">
+      <label for="end-at">終了日 <span class="smaller">(指定なし可)</span></label>
+      <input type="date" name="end_at" id="end-at" value="{{ post_data.end_at }}">
+    </div>
+  </form>
+</div>

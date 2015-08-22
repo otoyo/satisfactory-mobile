@@ -1,0 +1,75 @@
+<div data-role="page" id="result">
+  {% include "web/include/_panel_account.html" %}
+  <div data-role="header" data-id="header-result" data-position="fixed">
+    <a href="#show" data-transition="slidefade" data-direction="reverse" data-icon="carat-l" class="ui-btn-left">戻る</a>
+    <h1>結果</h1>
+    <a href="#panel-account" class="ui-btn-right">アカウント</a>
+  </div>
+  <div role="main" class="ui-content">
+    <div data-role="collapsible" data-content-theme="false" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-r" data-expanded-icon="carat-d">
+      <h4>CSVダウンロード</h4>
+      <p>Excelで開く場合はShift_JISを、その他の場合はUTF-8をお選びください。</p>
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <a href="/resource/sjis/questionnaire{{ questionnaire.id }}.csv" class="ui-btn ui-corner-all" data-ajax="false">Shift_JIS</a>
+        </div>
+        <div class="ui-block-b">
+          <a href="/resource/utf8/questionnaire{{ questionnaire.id }}.csv" class="ui-btn ui-corner-all" data-ajax="false">UTF-8</a>
+        </div>
+      </div>
+    </div>
+    <div class="ui-body ui-body-a ui-corner-all">
+      <h4>{{ questionnaire.name }}</h4>
+      {% for question in questionnaire.question_set.all %}
+        {% if question.is_selection_form_type %}
+          <p>{{ forloop.counter }}. {{ question.content }}</p>
+          {% if question.selectiveanswer_set.all %}
+            <table data-role="table" class="ui-responsive table-stroke smaller">
+              <thead>
+                <tr>
+                  <th>回答</th>
+                  <th>割合</th>
+                  <th>回答数</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for selectiveanswer in question.selectiveanswer_set.all %}
+                  <tr>
+                    <td>{{ selectiveanswer.content }}</td>
+                    <td>{{ selectiveanswer.percentage|default:'-' }}%</td>
+                    <td>{{ selectiveanswer.num }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>まだ回答がありません。</p>
+          {% endif %}
+        {% else %}
+          <p>{{ forloop.counter }}. {{ question.content }}</p>
+          {% if question.limit_textanswers %}
+            <table data-role="table" class="ui-responsive table-stroke smaller">
+              <thead>
+                <tr>
+                  <th>回答</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for textanswer in question.limit_textanswers %}
+                  <tr>
+                    <td>{{ textanswer.content }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <p class="right smaller"><a href="/questionnaire/{{ questionnaire.id }}/question/{{ question.id }}/textanswer" data-ajax="false">もっと見る</a></p>
+          {% else %}
+            <p>まだ回答がありません。</p>
+          {% endif %}
+        {% endif %}
+      {% empty %}
+        <p>まだ質問がありません。</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>

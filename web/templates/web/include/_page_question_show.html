@@ -1,0 +1,30 @@
+{% for question in questions %}
+<div data-role="page" id="show-{{ question.id }}">
+  <div data-role="header" data-id="header-show-{{ question.id }}" data-position="fixed">
+    <a href="#index" data-icon="carat-l" data-transition="slidefade" data-direction="reverse" class="ui-btn-left">戻る</a>
+    <h1>質問の詳細</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <div class="ui-body ui-body-a ui-corner-all">
+      <h4>質問の内容</h4>
+      <p>{{ question.content }}</p>
+      <h4>回答の形式</h4>
+      <p>{% if question.is_selection_form_type %}選択{% else %}テキスト{% endif %}</p>
+      {% if question.is_selection_form_type %}
+      <h4>選択肢</h4>
+      <ol>
+        {% for selectiveanswer in question.selectiveanswer_set.all %}
+        <li>{{ selectiveanswer.content }}</li>
+        {% endfor %}
+      </ol>
+      <h4>選択可能数</h4>
+      <p>{% include "web/helpers/min_max_num.html" with min=question.min_num_answers max=question.max_num_answers %}</p>
+      {% endif %}
+    </div>
+    <form action="/questionnaire/{{ questionnaire.id }}/question/{{ question.id }}/delete" method="post" data-ajax="false">
+      {% csrf_token %}
+      <p class="center"><a href="javascript:void(0);" class="smaller confirm-submit" data-msg="このアンケートを削除してもよろしいですか？">この質問を削除する</a></p>
+    </form>
+  </div>
+</div>
+{% endfor %}

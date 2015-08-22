@@ -1,0 +1,31 @@
+<div data-role="page" id="index">
+  <div data-role="header" data-id="header-index" data-position="fixed">
+    <a href="/questionnaire" data-ajax="false" data-icon="carat-l" class="ui-btn-left">戻る</a>
+    <h1>アカウント設定</h1>
+  </div>
+  <div role="main" class="ui-content">
+    {% if msg %}
+    <div class="ui-body ui-body-a ui-corner-all">
+      {% include "web/helpers/msg.html" with msg=msg %}
+    </div>
+    <div class="margin-top-10px"></div>
+    {% endif %}
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#email-edit" data-transition="slideup" data-icon="mail">Eメール変更</a></li>
+        <li><a href="#password-edit" data-transition="slideup" data-icon="lock">パスワード変更</a></li>
+      </ul>
+    </div>
+    <div class="margin-top-10px"></div>
+    <div class="ui-body ui-body-a ui-corner-all">
+      <h4>アカウント名</h4>
+      <p>{{ user.username }}</p>
+      <h4>Eメールアドレス</h4>
+      <p>{{ user.email }}</p>
+    </div>
+    <form action="/resign" method="post" data-ajax="false">
+      {% csrf_token %}
+      <p class="center"><a href="javascript:void(0);" class="smaller confirm-submit" data-msg="本当に退会してもよろしいですか？">退会する</a></p>
+    </form>
+  </div>
+</div>

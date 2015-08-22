@@ -1,0 +1,13 @@
+{% if min and max %}
+{% if min == max %}
+{{ min }}個
+{% else %}
+{{ min }}~{{ max }}個
+{% endif %}
+{% elif min %}
+{{ min }}個以上
+{% elif max %}
+{{ max }}個以下
+{% else %}
+無制限
+{% endif %}

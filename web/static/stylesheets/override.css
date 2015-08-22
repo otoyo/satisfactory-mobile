@@ -1,0 +1,6 @@
+/*
+ * jQuery Mobile
+ */
+.ui-header .ui-title, .ui-footer .ui-title {
+  margin: 0 25%;
+}

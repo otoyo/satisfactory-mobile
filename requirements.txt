@@ -1,0 +1,5 @@
+Django==1.7.4
+--allow-external mysql-connector-python
+mysql-connector-python==1.2.3
+pytz==2014.10
+gunicorn==19.3

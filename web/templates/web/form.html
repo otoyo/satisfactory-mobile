@@ -1,0 +1,58 @@
+{% extends "web/layouts/default.html" %}
+
+{% load concat %}
+{% load get %}
+{% load to_i %}
+
+{% block title %}{{ questionnaire.name }}{% endblock %}
+
+{% block body %}
+<div data-role="page" id="form">
+  <div role="main" class="ui-content">
+    <h3 class="ui-bar ui-bar-a margin-top-0">{{ questionnaire.name }}</h3>
+    <p class="ui-body ui-body-a ui-corner-all">{{ questionnaire.content|linebreaksbr }}</p>
+    <form action="/-/{{ questionnaire.urlkey.val }}" method="post" data-ajax="false">
+      {% csrf_token %}
+      {% for question in questionnaire.question_set.all %}
+        <p>{{ forloop.counter }}. {{ question.content }}</p>
+        {% if question.is_selection_form_type %}
+          {% if question.min_num_answers == 1 and question.max_num_answers == 1 %}
+            <fieldset data-role="controlgroup">
+              {% with name='question_'|concat:question.id %}
+                {% with value=post_data|get:name %}
+                  {% for selectiveanswer in question.selectiveanswer_set.all %}
+                    <input type="radio" name="{{ name }}" value="{{ selectiveanswer.id }}" id="question-{{ question.id }}-selectiveanswer-{{ selectiveanswer.id }}"{% if not value and forloop.first or value and value|to_i == selectiveanswer.id %} checked="checked"{% endif %} /><label for="question-{{ question.id }}-selectiveanswer-{{ selectiveanswer.id }}">{{ selectiveanswer.content }}</label>
+                  {% endfor %}
+                {% endwith %}
+              {% endwith %}
+            </fieldset>
+          {% else %}
+            {% if 'question_'|concat:question.id in errors %}
+              <p class="error">選択数をご確認ください。</p>
+            {% endif %}
+            <fieldset data-role="controlgroup">
+              <legend><span class="smaller"><strong>{% include "web/helpers/min_max_num.html" with min=question.min_num_answers max=question.max_num_answers %}</strong>でお選びください。</span></legend>
+              {% for selectiveanswer in question.selectiveanswer_set.all %}
+                {% with name='question_'|concat:question.id|concat:'_selectiveanswer_'|concat:selectiveanswer.id %}
+                  {% with value=post_data|get:name %}
+                    <input type="checkbox" name="{{ name }}" value="1" id="question-{{ question.id }}-selectiveanswer-{{ selectiveanswer.id }}"{% if value and value|to_i == 1 %} checked="checked"{% endif %} /><label for="question-{{ question.id }}-selectiveanswer-{{ selectiveanswer.id }}">{{ selectiveanswer.content }}</label>
+                  {% endwith %}
+                {% endwith %}
+              {% endfor %}
+            </fieldset>
+          {% endif %}
+        {% else %}
+          {% with name='question_'|concat:question.id %}
+            {% with value=post_data|get:name %}
+              <textarea name="{{ name }}" placeholder="回答をご入力ください。">{{ value|default:'' }}</textarea>
+            {% endwith %}
+          {% endwith %}
+        {% endif %}
+      {% endfor %}
+      <div class="margin-top-20px"></div>
+      <button type="submit" class="ui-shadow ui-btn ui-corner-all">完了</button>
+    </form>
+    <div class="margin-top-20px smaller center">Published by <a href="/" data-ajax="false" target="_blank">Satisfactory Mobile</a></div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<div data-role="page" id="index">
+  {% include "web/include/_panel_account.html" %}
+  <div data-role="header" data-id="header-index" data-position="fixed">
+    <a href="/questionnaire/{{ questionnaire.id }}#result" data-ajax="false" data-icon="carat-l" class="ui-btn-left">戻る</a>
+    <h1>{{ question.content }}</h1>
+    <a href="#panel-account" class="ui-btn-right">アカウント</a>
+  </div>
+  <div role="main" class="ui-content">
+    {% for textanswer in pager.textanswers %}
+      <div class="ui-body ui-body-a ui-corner-all">
+        <p>{{ textanswer.content|linebreaksbr }}</p>
+      </div>
+      <div class="margin-top-15px"></div>
+    {% empty %}
+      <div class="ui-body ui-body-a ui-corner-all">
+        <p>まだ回答がありません。</p>
+      </div>
+    {% endfor %}
+    {% if pager.next_max_id %}
+      <p class="center">
+        <a href="/questionnaire/{{ questionnaire.id }}/question/{{ question.id }}/textanswer?i={{ pager.next_max_id }}" data-ajax="false">次へ</a>
+      </p>
+    {% endif %}
+  </div>
+</div>
